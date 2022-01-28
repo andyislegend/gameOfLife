@@ -1,6 +1,6 @@
 package com.avenga;
 
-import com.avenga.game.DecentralizedGame;
+import com.avenga.game.impl.DecentralizedGame;
 import com.avenga.game.Game;
 import com.avenga.model.CellState;
 import com.avenga.render.impl.CellStateContainer;

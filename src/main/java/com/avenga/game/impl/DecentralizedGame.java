@@ -1,5 +1,6 @@
-package com.avenga.game;
+package com.avenga.game.impl;
 
+import com.avenga.game.Game;
 import com.avenga.game.aggregator.CellAggregator;
 import com.avenga.game.processor.CellProcessor;
 import com.avenga.game.processor.impl.DecentralizedCellProcessor;

@@ -25,6 +25,12 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.10</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jcuda</groupId>
+            <artifactId>jcuda</artifactId>
+            <version>10.2.0</version>
+        </dependency>
     </dependencies>
 
     <build>
