@@ -10,7 +10,5 @@ public interface CellProcessor {
 
     void updateNeighbourState(Cell neighbour, int version);
 
-    void start();
-
     void finish();
 }

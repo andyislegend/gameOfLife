@@ -16,9 +16,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.avenga.util.ConcurrentUtil.tryToAwait;
+import static java.lang.String.format;
 import static java.util.stream.Collectors.toMap;
 
-public class DecentralizedCellProcessor extends Thread implements CellProcessor {
+public class DecentralizedCellProcessor implements Runnable, CellProcessor {
 
     private final Cell cell;
     private final Map<Point, CellState> neighbours;
@@ -94,6 +95,7 @@ public class DecentralizedCellProcessor extends Thread implements CellProcessor 
                 if (version == this.neighbourCheckVersion.get()) {
                     break;
                 }
+                Thread.yield();
             }
         }
         neighbours.put(neighbour.getCoordinates(), neighbour.getState());
@@ -106,5 +108,10 @@ public class DecentralizedCellProcessor extends Thread implements CellProcessor 
     @Override
     public void finish() {
         start = false;
+    }
+
+    @Override
+    public String toString() {
+        return format("Cell processor [%d][%d]", cell.getCoordinates().x(), cell.getCoordinates().y());
     }
 }
