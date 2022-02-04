@@ -29,15 +29,11 @@ public class Int2DGridContainer implements GridContainer {
         return grid2D[row][col] == 1;
     }
 
-    public int getSize() {
-        return numberOfColumns * numberOfRows;
-    }
-
     public int[][] getGrid() {
         return grid2D;
     }
 
-    public void setGrid(int[][] grid) {
+    public void resetGrid(int[][] grid) {
         this.grid2D = grid;
     }
 }

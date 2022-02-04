@@ -29,7 +29,7 @@ public class MainFrame {
 
         stopButton = new JButton(STOP_BUTTON_ICON_CODE);
         stopButton.addActionListener(e -> {
-            game.stop();
+            game.terminate();
             startButton.setEnabled(false);
             stopButton.setEnabled(false);
         });

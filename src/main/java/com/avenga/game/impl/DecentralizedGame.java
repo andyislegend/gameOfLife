@@ -66,7 +66,7 @@ public class DecentralizedGame implements Game {
     }
 
     @Override
-    public void stop() {
+    public void terminate() {
         for (CellProcessor processor : processors.values()) {
             processor.finish();
         }

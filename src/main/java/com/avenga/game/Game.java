@@ -4,5 +4,5 @@ public interface Game {
 
     void start();
 
-    void stop();
+    void terminate();
 }

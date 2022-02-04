@@ -19,7 +19,7 @@ public class CudaCentralizedGame implements Game {
     }
 
     @Override
-    public void stop() {
+    public void terminate() {
         gridProcessor.finish();
     }
 }

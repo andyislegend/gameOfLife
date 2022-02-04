@@ -34,6 +34,23 @@ public class CellUtil {
         return neighbours;
     }
 
+    public static int countAliveNeighbours(Point cellPosition, int[][] grid, int numberOfRows, int numberOfCols) {
+        int alive = 0;
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                int cellRow = cellPosition.x();
+                int cellColumn = cellPosition.y();
+                if (isRowOutOfBounds(i, cellRow, numberOfRows) ||
+                        isColumnOutOfBounds(j, cellColumn, numberOfCols) ||
+                        isSelf(i, j)) {
+                    continue;
+                }
+                alive += grid[i + cellRow][j + cellColumn];
+            }
+        }
+        return alive;
+    }
+
     private static boolean isRowOutOfBounds(int row, int cellRow, int numberOfRows) {
         return row + cellRow < 0 || row + cellRow > (numberOfRows - 1);
     }
