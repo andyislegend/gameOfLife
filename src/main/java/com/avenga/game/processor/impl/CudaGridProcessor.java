@@ -12,9 +12,11 @@ import static jcuda.driver.JCudaDriver.*;
 public class CudaGridProcessor extends Thread {
 
     private static final String KERNEL_FILE_PATH = "/cuda/CudaCellGenerationKernel.cu";
+    private static final int MAX_THREADS_PER_BLOCK = 1024;
 
     private final Int1DGridContainer gridContainer;
     private final GridRenderer renderer;
+    private final int cudaGridSize;
     private final CUdeviceptr gridPointer;
 
     private volatile boolean start;
@@ -22,6 +24,7 @@ public class CudaGridProcessor extends Thread {
     public CudaGridProcessor(Int1DGridContainer gridContainer, GridRenderer renderer) {
         this.gridContainer = gridContainer;
         this.renderer = renderer;
+        this.cudaGridSize = (int) Math.ceil((double) gridContainer.getSize() / MAX_THREADS_PER_BLOCK);
         this.gridPointer = new CUdeviceptr();
 
         this.start = true;
@@ -40,8 +43,8 @@ public class CudaGridProcessor extends Thread {
 
         while (start) {
             cuLaunchKernel(kernel,
-                    1, 1, 1,        // Grid dimension
-                    gridContainer.getSize(), 1, 1,   // Block dimension
+                    cudaGridSize, 1, 1,        // Grid dimension
+                    MAX_THREADS_PER_BLOCK, 1, 1,   // Block dimension
                     0, null,             // Shared memory size and stream
                     kernelParameters, null               // Kernel- and extra parameters
             );

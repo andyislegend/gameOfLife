@@ -1,7 +1,7 @@
 extern "C"
 __global__ void runCellGeneration(int* iteration, int numberOfRows, int numberOfCols)
 {
-    int threadId = threadIdx.x;
+    int threadId = blockIdx.x * blockDim.x + threadIdx.x;
 
     int row = threadId / numberOfRows;
     int col = threadId % numberOfCols;
