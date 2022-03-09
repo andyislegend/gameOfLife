@@ -35,11 +35,9 @@ public class CellGeneration {
         for (int row = 0; row < numberOfRows; row++) {
             for (int col = 0; col < numberOfColumns; col++) {
                 var coordinates = new Point(row, col);
-                var cellProcessor = new Thread(
-                        new ClassicCellProcessor(coordinates, grid, nextGrid, numberOfRows, numberOfColumns, waiter),
-                        String.format("Cell processor [%d][%d]", row, col)
-                );
-                cellProcessor.start();
+                Thread.ofVirtual()
+                        .name(String.format("Cell processor [%d][%d]", row, col))
+                        .start(new ClassicCellProcessor(coordinates, grid, nextGrid, numberOfRows, numberOfColumns, waiter));
             }
         }
         waitForOthers();
