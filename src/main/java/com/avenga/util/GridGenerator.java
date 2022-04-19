@@ -54,10 +54,10 @@ public class GridGenerator {
         return grid;
     }
 
-    public static int[][] generateGridFromFile(String filePath) {
-        URL resource = GridGenerator.class.getResource(filePath);
+    public static int[][] generateGridFromResource(String name) {
+        URL resourceUrl = GridGenerator.class.getResource(name);
         try {
-            URI uri = resource.toURI();
+            URI uri = resourceUrl.toURI();
             registerJarFileSystem(uri);
             return Files.lines(Paths.get(uri))
                     .map(line -> Arrays.stream(line.split(" "))
@@ -69,10 +69,10 @@ public class GridGenerator {
         }
     }
 
-    public static int[] generateGrid1DFromFile(String filePath) {
-        URL resource = GridGenerator.class.getResource(filePath);
+    public static int[] generateGrid1DFromResource(String name) {
+        URL resourceUrl = GridGenerator.class.getResource(name);
         try {
-            URI uri = resource.toURI();
+            URI uri = resourceUrl.toURI();
             registerJarFileSystem(uri);
             return Files.lines(Paths.get(uri))
                     .map(line -> Arrays.stream(line.split(" "))
@@ -85,10 +85,10 @@ public class GridGenerator {
         }
     }
 
-    public static CellState[][] generateCellStateGridFromFile(String filePath) {
-        URL resource = GridGenerator.class.getResource(filePath);
+    public static CellState[][] generateCellStateGridFromResource(String name) {
+        URL resourceUrl = GridGenerator.class.getResource(name);
         try {
-            URI uri = resource.toURI();
+            URI uri = resourceUrl.toURI();
             registerJarFileSystem(uri);
             return Files.lines(Paths.get(uri))
                     .map(line -> Arrays.stream(line.split(" "))

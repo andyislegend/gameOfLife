@@ -40,7 +40,11 @@ public class ConcurrentUtil {
 
     public static void tryToAwait(CyclicBarrier barrier, long timeout, TimeUnit timeUnit) {
         try {
-            barrier.await(timeout, timeUnit);
+            if (timeout == 0) {
+                tryToAwait(barrier);
+            } else {
+                barrier.await(timeout, timeUnit);
+            }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             log.error("Interrupted:", e);

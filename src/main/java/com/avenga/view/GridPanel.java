@@ -8,14 +8,8 @@ import java.awt.*;
 
 public class GridPanel extends JPanel {
 
-    private static final int DEFAULT_GRID_SCALE = 20;
-
     private final int scale;
     private final GridContainer zeroIteration;
-
-    public GridPanel(GridContainer zeroIteration) {
-        this(zeroIteration, DEFAULT_GRID_SCALE);
-    }
 
     public GridPanel(GridContainer zeroIteration, int scale) {
         this.zeroIteration = zeroIteration;

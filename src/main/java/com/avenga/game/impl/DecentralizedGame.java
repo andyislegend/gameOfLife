@@ -1,5 +1,6 @@
 package com.avenga.game.impl;
 
+import com.avenga.config.ApplicationProperties;
 import com.avenga.game.Game;
 import com.avenga.game.aggregator.CellAggregator;
 import com.avenga.game.processor.CellProcessor;
@@ -7,8 +8,8 @@ import com.avenga.game.processor.impl.DecentralizedCellProcessor;
 import com.avenga.model.Cell;
 import com.avenga.model.CellState;
 import com.avenga.model.Point;
-import com.avenga.render.impl.CellStateContainer;
 import com.avenga.render.GridRenderer;
+import com.avenga.render.impl.CellStateContainer;
 import com.avenga.util.CellUtil;
 
 import java.util.HashMap;
@@ -20,11 +21,13 @@ public class DecentralizedGame implements Game {
 
     private final Map<Point, CellProcessor> processors;
 
-    public DecentralizedGame(CellStateContainer zeroGeneration, GridRenderer renderer) {
-        processors = init(zeroGeneration, renderer);
+    public DecentralizedGame(ApplicationProperties properties,
+                             CellStateContainer zeroGeneration,
+                             GridRenderer renderer) {
+        processors = init(properties, zeroGeneration, renderer);
     }
 
-    private Map<Point, CellProcessor> init(CellStateContainer zeroGeneration, GridRenderer renderer) {
+    private Map<Point, CellProcessor> init(ApplicationProperties properties, CellStateContainer zeroGeneration, GridRenderer renderer) {
         int numberOfRows = zeroGeneration.getNumberOfRows();
         int numberOfCols = zeroGeneration.getNumberOfColumns();
 
@@ -38,7 +41,7 @@ public class DecentralizedGame implements Game {
                 CellState cellState = zeroGeneration.getGrid()[i][j];
                 Cell cell = new Cell(cellPosition, cellState);
                 List<Cell> neighbours = CellUtil.findNeighbours(cellPosition, zeroGeneration.getGrid());
-                DecentralizedCellProcessor cellProcessor = new DecentralizedCellProcessor(cell, neighbours, cellAggregator, barrier);
+                DecentralizedCellProcessor cellProcessor = new DecentralizedCellProcessor(cell, neighbours, cellAggregator, barrier, properties);
                 cellProcessor.setName(String.format("Cell processor [%d][%d]", i, j));
 
                 cellsWithNeighbours.put(cellPosition, neighbours);
